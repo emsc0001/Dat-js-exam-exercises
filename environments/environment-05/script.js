@@ -1,50 +1,14 @@
 "use strict";
 
-import courses from "./courses";
-console.log(courses);
+fetch("courses.js")
+.then(response => response.json)
+.then(data => showInfo(data))
 
-
-
-// script.js
-
-
-function displayCourses() {
-  const coursesList = document.getElementById("courses-list");
-  const selectFilterEcts = document.getElementById("select-filter-ects");
-  const selectedEcts = parseInt(selectFilterEcts.value);
-
-  coursesList.innerHTML = "";
-
-  courses.forEach(function(course) {
-    if (course.ectsPoints === selectedEcts || selectedEcts === 0) {
-      const courseElement = document.createElement("li");
-      courseElement.innerHTML = "<strong>Name:</strong> " + course.name + "<br>" +
-                                "<strong>ECTS Points:</strong> " + course.ectsPoints + "<br>" +
-                                "<strong>Teacher:</strong> " + course.teacher + "<br>";
-
-      coursesList.appendChild(courseElement);
-    }
-  });
+function showInfo (data) {
+  console.log(data);
 }
 
-function addCourse() {
-  const name = prompt("Enter the course name:");
-  const ectsPoints = parseInt(prompt("Enter the ECTS points:"));
-  const teacher = prompt("Enter the teacher's name:");
 
-  const newCourse = {
-    name,
-    ectsPoints,
-    teacher
-  };
-
-  courses.push(newCourse);
-
-  displayCourses();
-}
-
-// Vis eksisterende kurser
-displayCourses();
 
 
 
