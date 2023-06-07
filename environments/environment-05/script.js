@@ -1,60 +1,29 @@
 "use strict";
 
-fetch("courses.js")
-.then(response => response.json)
-.then(data => showInfo(data))
+import { courses } from "./courses.js";
 
-function showInfo (data) {
-  console.log(data);
+const listSelector = document.querySelector("#courses-list");
+
+window.addEventListener("load", start) 
+
+function start () {
+  sortByStartDate()
+  showCourses()
 }
 
+function showCourses () {
+  listSelector.textContent = ""
+  courses.forEach(showcourse);
+}
 
+function showcourse (course) {
+  const courseHTML = /*HTML*/ `
+  <li> ${course.name}, ${course.startDate} - ${course.ectsPoints} pts </li>
+  `
+  listSelector.insertAdjacentHTML("beforeend", courseHTML)
+}
 
-
-
-// let students = []
-
-// function start () {
-//     console.log();
-//     document.querySelector("#create-student-form").addEventListener("submit", submitform);
-
-// }
-
-// function sumbitForm(event) {
-//     event.preventDefault();
-//     const form = event.target;
-
-//     const name = form.name.value;
-//     const email = form.email.value;
-//     const age = Number(form.age.value);
-
-
-// const newStudent = addStudent (name, email, age);
-// console.log(newStudent);
-// students.push(newStudent);
-// ;
-// }
-
-// function showStudent(students) {
-//     document.querySelector("tbody").innerHTML = "";
-//     for (const student of students) {
-//         displayStudent(student);
-//     }
-// }
-
-// function sortBy(array) {
-//     array.sort((a, b) => a.age - b.age);
-
-// }
-
-// function displayStudent(student) {
-//     const html = /*html*/
-
-//    <tr>
-//             <td>$name</td>
-//             <th>email</th>
-//             <th>age</th>
-//           </tr>
-// }
-
+function sortByStartDate() {
+  courses.sort((a,b)=>  a.startDate.localeCompare(b.startDate))
+}
 

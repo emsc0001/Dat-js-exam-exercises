@@ -1,9 +1,9 @@
 "use strict";
 
 let products = [
-    { name: "Product 1", price: 10.99, inStock: true },
-    { name: "Product 2", price: 19.99, inStock: false },
-    { name: "Product 3", price: 7.99, inStock: true }
+    { name: "Product 1", price: 10, inStock: true },
+    { name: "Product 2", price: 20, inStock: false },
+    { name: "Product 3", price: 5, inStock: true }
   ];
   
   // Function to display the product list
