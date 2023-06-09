@@ -1,43 +1,49 @@
 "use strict";
 
-window.addEventListener("load", start);
+window.addEventListener("load", start)
+
+let users
+
+const listSelector = document.querySelector("#userlist");
 
 async function start () {
-  console.log("hi");
-  const userData = await getUsers()
-
+  users = await getData()
+  console.log(users);
+  showUsers()
 }
 
-async function getUsers (){
-  const reponse = await fetch("users.json")
-  const data = await response.json()
-  return data;
+async function getData () {
+  const data = await fetch ("users.json")
+  return data.json()
 }
 
-function showUsers(userData){
-  document.querySelector("#userlist").innerHTML=""
-  for(const user of userData){
-    const html = `<li>${user.name}, ${user.role} </li>`
-    document.querySelector("userlist").insertAdjacentHTML("beforeend", HTML);
-  }
-  countUsers(userData);
+function showUsers () {
+  listSelector.textContent = ""
+  users.forEach(showUser)
 }
 
-function countUsers(userData){
-  let adminCount = 0
-  let userCount = 0
-  let guestCount = 0
+function showUser (user) {
+  const userHTML = /*HTML*/ `
+  <li>Name: ${user.name} - ${user.role}</li>`
+  listSelector.insertAdjacentHTML("beforeend", userHTML)
+  countUsers(users);
+}
 
-  for(const user of userData){
+function countUsers(list) {
+  let admins = 0
+  let users = 0
+  let guests = 0
+
+  for(const user of list){
     if (user.role === "admin"){
-      adminCount+++
+      admins++
     } else if (user.role === "user") {
-      userCount++;
+      users++;
     } else if (user.role === "guest") {
-      guestCount++;
+      guests++;
     }
   }
-    document.querySelector("#admin-count").textContent = adminCount 
-    document.querySelector("#user-count").textContent = userCount 
-    document.querySelector("#guest-count").textContent = guestCount 
-  }
+    document.querySelector("#admin-count").textContent = admins
+    document.querySelector("#user-count").textContent = users
+    document.querySelector("#guest-count").textContent = guests
+}

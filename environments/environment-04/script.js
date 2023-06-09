@@ -1,33 +1,37 @@
 "use strict";
 
-fetch('./teachers.js')
-  .then((response) => response.json())
-  
+import { teachers } from "./teachers.js";
 
-function displayTeachers() {
-  const teachersList = document.getElementById('teachers-list');
-  teachersList.innerHTML = ''; // Fjern eventuelle eksisterende elementer i listen
+window.addEventListener("load", start);
 
-  teachers.forEach((teacher) => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `Name: ${teacher.name}, Email: ${teacher.email}`;
-    teachersList.appendChild(listItem);
-  });
+const listSelector = document.querySelector("#teachers-list");
+
+function start() {
+  showTeachers(listSelector)
+  sortByName()
+  sortByEmail()
 }
+
+function showTeachers(listSelector) {
+  listSelector.textContent = "";
+  teachers.forEach((teacher) => showTeacher(listSelector, teacher));
+}
+
+function showTeacher(listSelector, teacher) {
+  const teacherHTML = /*HTML*/ `<li>${teacher.name}, ${teacher.email}</li>`;
+  listSelector.insertAdjacentHTML("beforeend", teacherHTML);
+}
+
 
 function sortByName() {
   teachers.sort((a, b) => a.name.localeCompare(b.name));
-  displayTeachers();
+  showTeachers(listSelector);
 }
 
 function sortByEmail() {
   teachers.sort((a, b) => a.email.localeCompare(b.email));
-  displayTeachers();
+  showTeachers(listSelector);
 }
-
-displayTeachers();
-
-
 
 
 // ________________Øvelse 10________________________

@@ -3,7 +3,7 @@
 window.addEventListener("load", start);
 
 function start() {
-  console.log("hi");
+  console.log("Page loaded");
   document.getElementById("create-form").addEventListener("submit", createAnimal);
 }
 
@@ -12,36 +12,38 @@ const animals = [];
 function createAnimal(event) {
   event.preventDefault();
 
-  const nameInput = document.getElementById("animal-name").value;
-  const typeInput = document.getElementById("animal-type").value;
-  const ageInput = document.getElementById("animal-age").value;
+  const name = document.getElementById("animal-name").value;
+  const type = document.getElementById("animal-type").value;
+  const age = document.getElementById("animal-age").value;
 
   const animal = {
-    name: nameInput,
-    type: typeInput,
-    age: ageInput
+    name: name,
+    type: type,
+    age: age
   };
 
   animals.push(animal);
-  console.log(animals);
+  resetForm();
   displayAnimals();
-  event.target.reset();
 }
 
+function resetForm() {
+  document.getElementById("create-form").reset();
+}
 
 function displayAnimals() {
-  const animalTableBody = document.querySelector("#list-container tbody");
-  animalTableBody.innerHTML = "";
-
   const sortedAnimals = animals.sort((a, b) => a.name.localeCompare(b.name));
 
-  sortedAnimals.forEach((animal) => {
+  const tableBody = document.querySelector("#list-container tbody");
+  tableBody.innerHTML = "";
+
+  for (const animal of sortedAnimals) {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${animal.name}</td>
       <td>${animal.type}</td>
       <td>${animal.age}</td>
     `;
-    animalTableBody.appendChild(row);
-  });
+    tableBody.appendChild(row);
+  }
 }
