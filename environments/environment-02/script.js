@@ -2,23 +2,25 @@
 
 // _________________________________________ Øvelse 3 _____________________________________ //
 
+"use strict";
+
 window.addEventListener("load", start)
 
 const animals = []
 
 function start () {
-  console.log("running");
-  document.querySelector("#create-form").addEventListener("submit", addAnimal);
+  console.log("running")
+  document.querySelector("#create-form").addEventListener("submit", addAnimal)
 }
 
-function addAnimal (event) {
-  event.preventDefault();
+function addAnimal(event){
+  event.preventDefault()
 
   const name = document.querySelector("#animal-name").value
   const type = document.querySelector("#animal-type").value
   const age = document.querySelector("#animal-age").value
 
-  document.querySelector("#animal-list").innerHTML = ""
+
 
   const newAnimal = {
     name: name,
@@ -27,15 +29,18 @@ function addAnimal (event) {
   }
 
   animals.push(newAnimal)
-  console.log(newAnimal)
+  
+  document.querySelector("#list-container").innerHTML = ""
+
+  animals.sort((a,b) => a.name.localeCompare(b.name))
+  
   animals.forEach(showAnimals)
+  
 }
 
 function showAnimals (animal) {
-  console.log("hi")
-  document.querySelector("#animal-list").insertAdjacentHTML("beforeend", /*html*/ `
-  <li>${animal.name}${animal.type}, ${animal.age} </li>`)
-  animals.sort((a, b) => a.name.localeCompare(b.name))
+  document.querySelector("#list-container").insertAdjacentHTML("beforeend", /*html*/ `
+  <li> ${animal.name}, ${animal.type}, ${animal.age} </li>`);
 }
 
 

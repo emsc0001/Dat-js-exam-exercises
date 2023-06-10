@@ -1,28 +1,57 @@
 "use strict";
 
-window.addEventListener("load", start)
 
-let users
+// ØVELSE 1
 
-async function start () {
-  users = await getData()
-  console.log(users)
-  showUsers()
+// window.addEventListener("load", start)
+
+// async function start () {
+//   const users = await getUser()
+//   console.log(users)
+//   users.forEach(showUsers)
+// }
+
+// async function getUser() {
+//   const response = await fetch ("users.json")
+//   const data = response.json()
+//   return data;
+// }
+
+
+// function showUsers(user) {
+//   if (user.role === "admin") {
+
+//   document.querySelector("#userlist").insertAdjacentHTML(
+//     "beforeend", /*HTML*/ `
+//     <li>${user.name} - ${user.active}</li>`)
+//  }
+// }
+
+
+// ØVELSE 2 TILFØJ
+
+// og husk at kalde den i start funktionen
+
+
+async function countRoles() {
+  const users = await getUsers();
+
+  let adminCount = 0;
+  let userCount = 0;
+  let guestCount = 0;
+
+  users.forEach((users) => {
+    if (users.role === "admin"){
+    adminCount++ 
+    } else if (user.role ==="user"){
+      userCount++;
+    } else if (user.role === "guest")
+      guestCount++;
+  })
+
+  document.querySelector("#admin-count").textContent = adminCount;
+  document.querySelector("#user-count").textContent = adminCount;
+  document.querySelector("#guest-count").textContent = adminCount;
 }
 
-async function getData() {
-  const data = await fetch ("users.json")
-  return data.json();
-}
-
-function showUser () {
-  listSelector.textContent = ""
-  users.forEach(showUser)
-}
-
-function showUsers(user)
-  const userHTML = /*HTML*/ `
-  <li>${user.name} - ${user.active} </li>`
-  listSelector.insertAdjacentHTML("beforeend", userHTML)
-  
 
