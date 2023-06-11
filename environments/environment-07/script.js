@@ -1,16 +1,47 @@
 "use strict";
 
-
 window.addEventListener("load", start)
 
+let students = []
 
+function start () {
+    console.log("running")
+    document.querySelector("button").addEventListener("click", addStudent)
+}
 
+function addStudent (event) {
+    event.preventDefault()
+    
+    const name = document.querySelector("#name").value
+    const email = document.querySelector("#email").value
+    const age = document.querySelector("#age").value
+    
+    if (!validateEmail(email)) {
+        console.log("invalid email")
+        return;
+    }
 
+    const newStudent = {
+        name: name,
+        email: email,
+        age: age,
+    }
+    document.querySelector("#students-table-body").innerHTML = ""
+    students.push(newStudent)
+    students.forEach(showStudent)
+}
 
-
-
-
-
+function showStudent (student) {
+    document.querySelector("#students-table-body").insertAdjacentHTML("beforeend", /*HTML*/ `
+    <tr>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.age}</td>
+          </tr>`)
+}
+function validateEmail (email) {
+    return email.endsWith("@stud.kea.dk") && email.length >= 16;
+  }
 
 
 

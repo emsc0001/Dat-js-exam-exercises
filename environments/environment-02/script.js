@@ -1,49 +1,38 @@
 "use strict";
 
-// _________________________________________ Øvelse 3 _____________________________________ //
+// window.addEventListener("load", start)
 
-"use strict";
+// let animals = [];
 
-window.addEventListener("load", start)
+// function start () {
+//   console.log("running")
+//   document.querySelector("button").addEventListener("click", addAnimal)
+// }
 
-const animals = []
+// function addAnimal (event) {
+//   event.preventDefault()
 
-function start () {
-  console.log("running")
-  document.querySelector("#create-form").addEventListener("submit", addAnimal)
-}
+//   const name = document.querySelector("#animal-name").value
+//   const type = document.querySelector("#animal-type").value
+//   const age = document.querySelector("#animal-age").value
 
-function addAnimal(event){
-  event.preventDefault()
-
-  const name = document.querySelector("#animal-name").value
-  const type = document.querySelector("#animal-type").value
-  const age = document.querySelector("#animal-age").value
-
-
-
-  const newAnimal = {
-    name: name,
-    type: type,
-    age: age,
-  }
-
-  animals.push(newAnimal)
+//   const newAnimal = {
+//     name: name,
+//     type: type,
+//     age: age,
   
-  document.querySelector("#list-container").innerHTML = ""
+//   }
+//   document.querySelector("#list-container").innerHTML = ""
 
-  animals.sort((a,b) => a.name.localeCompare(b.name))
-  
-  animals.forEach(showAnimals)
-  
-}
+//   animals.push(newAnimal)
+//   animals.forEach(showAnimals)
+// }
 
-function showAnimals (animal) {
-  document.querySelector("#list-container").insertAdjacentHTML("beforeend", /*html*/ `
-  <li> ${animal.name}, ${animal.type}, ${animal.age} </li>`);
-}
-
-
+// function showAnimals (animal) {
+//   animals.sort((a, b) => a.age - b.age)
+//   document.querySelector("#list-container").insertAdjacentHTML("beforeend", /*HTML*/ `
+//   <li>${animal.name} - ${animal.type} - ${animal.age}</li>`)
+// }
 
 
 

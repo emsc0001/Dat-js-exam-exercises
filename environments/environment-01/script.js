@@ -4,24 +4,21 @@ window.addEventListener("load", start)
 
 async function start () {
   console.log("running")
-  const users = await getUsers()
-  console.log(users)
-  users.forEach(showUser)
+  const users = await getData()
+  console.log(users) 
+  users.forEach(showUsers)
+  
 }
 
-async function getUsers () {
+async function getData() {
   const response = await fetch ("users.json")
   const data = await response.json()
   return data;
 }
 
-function showUsers() {
-  document.querySelector("#userlist").innerHTML = ""
-}
-
-function showUser (user) {
+function showUsers(user) {
   if (user.role === "admin") {
   document.querySelector("#userlist").insertAdjacentHTML("beforeend", /*HTML*/ `
   <li> ${user.name} - ${user.role} - ${user.active} - </li>`)
-}
-}
+}}
+
