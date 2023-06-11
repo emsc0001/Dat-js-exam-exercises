@@ -1,73 +1,35 @@
 "use strict";
 
-// import { teachers } from "./teachers.js"
-
-
-// window.addEventListener("load", start)
-
-// const listSelector = document.querySelector("#teachers-list")
-
-// function start () {
-// console.log("running")
-// showTeachers()
-// addTeacher("Emil", "emilschlichter@gmail.com")
-// }
-
-// function showTeachers () {
-//   listSelector.textContent = ""
-//   teachers.forEach(showTeacher)
-// }
-
-// function showTeacher (teacher) {
-//   const HTML = /*HTML*/ `
-//   <li>${teacher.name} - ${teacher.email}</li>`
-//   listSelector.insertAdjacentHTML("beforeend", HTML)
-// }
-
-// function addTeacher (name, email) {
-//   const newTeacher = {
-//     name: name,
-//     email: email,
-//   }
-//   teachers.push(newTeacher)
-//   showTeachers()
-// }
-
-
-
 import { teachers } from "./teachers.js"
 
-const listSelector = document.querySelector("#teachers-list")
+
 
 window.addEventListener("load", start)
 
 function start () {
+  sortByName()
+  sortByEmail()
+  showTeachers()
   console.log("running")
-  showTeachers(showTeacher)
-  addTeacher("Emil", "emilschlichter@gmail.com")
-
 }
 
 function showTeachers () {
-  listSelector.textContent = ""
+  document.querySelector("#teachers-list").innerHTML = ""
   teachers.forEach(showTeacher)
 }
 
 function showTeacher (teacher) {
-  const HTML = /*HTML*/ `
-  <li> ${teacher.name} - ${teacher.email}</li>`
-  listSelector.insertAdjacentHTML("beforeend", HTML)
+  document.querySelector("#teachers-list").insertAdjacentHTML("beforeend", /*HTML*/ `
+  <li>${teacher.name} - ${teacher.email}</li>`)
 }
 
-function addTeacher (name, email) {
-  const newTeacher = {
-    name: name,
-    email: email,
-  }
-  teachers.push(newTeacher)
-  showTeachers()
+function sortByName () {
+teachers.sort ((a, b) => a.name.localeCompare(b.name))
 }
 
+function sortByEmail () {
+  teachers.sort ((a, b) => a.email.localeCompare(b.email))
+}
 
 
 

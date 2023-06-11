@@ -2,136 +2,152 @@
 
 const products = [
   {
-    name: "ler",
-    price: 1000,
-    inStock: true
+    name: "Ske",
+    price: 50,
+    inStock: false,
   },
   {
-    name: "sølv",
-    price: 2000,
-    inStock: true
+    name: "Gaffel",
+    price: 35,
+    inStock: true,
   },
   {
-    name: "guld",
-    price: 100,
-    inStock: true
+    name: "Kniv",
+    price: 50,
+    inStock: true,
   },
 ]
 
-window.addEventListener("load", start);
+window.addEventListener("load", start)
+
 
 function start () {
-  showProducts(products)
-  document.querySelector("#select-sort-by").addEventListener("change", sortBy)
-
+  console.log("running")
+  document.querySelector("#select-sort-by").addEventListener("change", sortProducts);
+  showProducts()
 }
 
-function showProducts(products) {
-  document.querySelector("#list-container").innerHTML = "";
-  for (const product of products) {
-  const html = /*html*/ `
-  <p>${product.name}, ${product.price}, ${product.inStock}</p>`;
-
-  document.querySelector("#list-container").insertAdjacentHTML("beforeend", html)
-}
+function showProducts () {
+  document.querySelector("#form-container").innerHTML = ""
+  products.forEach(showProduct)
 }
 
-function sortBy (event) {
-  const selectedValue = event.target.value;
+function showProduct (product) {
+  document.querySelector("#form-container").insertAdjacentHTML("beforeend", /*HTML*/ `
+  <li> ${product.name}, ${product.price}, ${product.inStock}</li>`)
+}
 
-  if (selectedValue === "name") {
-    products.sort((product1, product2) => product1.name.localeCompare(product2.name))
-  } else if (selectedValue === "price") {
-    products.sort((product1, product2) => product2.price - product1.price);
+function sortProducts () {
+  // Get selected option
+  let selectedOption = document.querySelector("#select-sort-by").value;
+
+  if (selectedOption === "name") {
+    products.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (selectedOption === "price") {
+    products.sort((a, b) => a.price - b.price);
+  } else if (selectedOption === "inStock") {
+    products.sort((a, b) => b.inStock - a.inStock);
+  }
+  showProducts();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const products = [
+//   {
+//     name: "Peber",
+//     price: 99,
+//     inStock: false,
+//   },
+//   {
+//     name: "Guld",
+//     price: 12,
+//     inStock: true,
+//   },
+// {
+//   name: "Salt",
+//   price: 55,
+//   inStock: false,
+// }
+// ]
+
+// window.addEventListener("load", start)
+
+// function start () {
+//   products.sort((a, b) => (b.inStock - a.inStock));
+//   products.forEach(showProducts)
+//   console.log("running")
+
+//   document.querySelector("#form-container").addEventListener("submit", addProduct);
+
+  
+// }
+
+// function showProducts (product) {
+//   document.querySelector("#form-container").insertAdjacentHTML("beforeend", /*HTML*/ `
+//   <li> ${product.name}, ${product.price}, ${product.inStock}</li>`)
+//    event.target.reset();
+// }
+
+// function addProduct (event) {
+//   event.preventDefault();
+//   event.target.reset();
+
+//   let name = document.querySelector("#product-name").value;
+//   let price = document.querySelector("#product-price").value;
+//   let inStock = document.querySelector("#product-inStock").checked;
+
+//   products.push({
+//     name: name,
+//     price: parseInt(price), // convert price to number
+//     inStock: inStock
+
     
-  } else if (selectedValue === "inStock") {
-    products.sort((product1, product2) => product2.inStock - product1.inStock);
-  }
-
-    showProducts(products)
-  }
-
-
-
+//   });
+//   };
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let products = [
-//     { name: "Product 1", price: 10, inStock: true },
-//     { name: "Product 2", price: 20, inStock: false },
-//     { name: "Product 3", price: 5, inStock: true }
-//   ];
-  
-//   // Function to display the product list
-//   function showProductList() {
-//     const listContainer = document.getElementById("list-container");
-//     listContainer.innerHTML = ""; // Clear the container
-  
-//     products
-//       .filter(product => product.inStock) // Filter products that are in stock
-//       .forEach(product => {
-//         const listItem = document.createElement("div");
-//         listItem.classList.add("product-item");
-//         listItem.innerHTML = `
-//           <h3>${product.name}</h3>
-//           <p>Price: ${product.price} DKK</p>
-//         `;
-//         listContainer.appendChild(listItem);
-//       });
+//   function updateProductList() {
+//     // Clear existing list
+//     document.querySelector("#form-container").innerHTML = "";
+    
+//     // Show all products
+//     products.forEach(showProducts);
 //   }
-  
-//   // Function to add a new product
-//   function addProduct(event) {
-//     event.preventDefault(); // Prevent form submission
-  
-//     const nameInput = document.getElementById("product-name");
-//     const priceInput = document.getElementById("product-price");
-//     const stockInput = document.getElementById("stock");
-  
-//     const name = nameInput.value;
-//     const price = parseFloat(priceInput.value);
-//     const inStock = stockInput.checked;
-  
-//     if (name && price) {
-//       const newProduct = { name, price, inStock };
-//       products.push(newProduct);
-  
-//       showProductList();
-  
-//       nameInput.value = "";
-//       priceInput.value = "";
-//       stockInput.checked = false;
-//     }
-//   }
-  
-//   // Add event listener to the form submission
-//   const createForm = document.getElementById("create-form");
-//   createForm.addEventListener("submit", addProduct);
-  
-//   // Display the product list on page load
-//   showProductList();
