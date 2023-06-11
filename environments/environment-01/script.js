@@ -20,7 +20,8 @@ function showUsers() {
 }
 
 function showUser (user) {
-  user === "admin"
+  if (user.role === "admin") {
   document.querySelector("#userlist").insertAdjacentHTML("beforeend", /*HTML*/ `
   <li> ${user.name} - ${user.role} - ${user.active} - </li>`)
+}
 }
