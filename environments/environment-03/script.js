@@ -2,66 +2,54 @@
 
 const products = [
   {
-    name: "Ske",
-    price: 50,
-    inStock: false,
-  },
-  {
-    name: "Gaffel",
-    price: 35,
+    name: "Computer",
+    price: 100,
     inStock: true,
   },
   {
-    name: "Kniv",
-    price: 50,
+    name: "Glas",
+    price: 10,
+    inStock: false,
+  },
+  {
+    name: "Ske",
+    price: 2,
     inStock: true,
   },
 ]
 
 window.addEventListener("load", start)
 
-
 function start () {
-  console.log("running")
-  document.querySelector("#select-sort-by").addEventListener("change", sortProducts);
-  showProducts()
+  console.log(products)
+  document.querySelector("#create-form").addEventListener("click", addProduct)
+  products.forEach(showProducts)
 }
 
-function showProducts () {
-  document.querySelector("#form-container").innerHTML = ""
-  products.forEach(showProduct)
-}
 
-function showProduct (product) {
+function addProduct (event) {
+  event.preventDefault()
+  
+  const name = document.querySelector("#product-name").value
+  const price = document.querySelector("#product-price").value
+  const inStock = document.querySelector("#product-inStock").value
+  
+  const newProduct = {
+    name: name,
+    price: price,
+    inStock: inStock,
+  }
+  products.push(newProduct)
+  showProducts(newProduct)
+};
+
+
+
+
+function showProducts (product) {
   document.querySelector("#form-container").insertAdjacentHTML("beforeend", /*HTML*/ `
   <li> ${product.name}, ${product.price}, ${product.inStock}</li>`)
 }
-
-function sortProducts () {
-  // Get selected option
-  let selectedOption = document.querySelector("#select-sort-by").value;
-
-  if (selectedOption === "name") {
-    products.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (selectedOption === "price") {
-    products.sort((a, b) => a.price - b.price);
-  } else if (selectedOption === "inStock") {
-    products.sort((a, b) => b.inStock - a.inStock);
-  }
-  showProducts();
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
